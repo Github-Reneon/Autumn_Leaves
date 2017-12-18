@@ -1,25 +1,16 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
 
+#include "charactercontroller.h"
 sf::RenderWindow window(sf::VideoMode(512,512), "Autumn Leaves", sf::Style::Close | sf::Style::Titlebar);
 
-class characterController {
-    public:
-    float x,y = 0.0f;
-    sf::Texture texture;
-    sf::Sprite sprite;
-    characterController (){
-        sprite.setPosition(x,y);
-        if (!texture.loadFromFile("textures/test_texture.png")){
-            std::cout << "Error loading texture from a character Controller" << std::endl;
-            window.close();
-        }
-        sprite.setTexture(texture);
-    }
-};
 characterController player;
 int main(int argc, char** argv)
 {
+
+    float xPosChange = 0.0f;
+    float yPosChange = 0.0f;
+    float xNegChange = 0.0f;
+    float yNegChange = 0.0f;
+    float spd = 0.2f;
     while(window.isOpen()){
     sf::Event event;
         while(window.pollEvent(event)){
@@ -28,17 +19,46 @@ int main(int argc, char** argv)
                     window.close();
                     break;
                 case sf::Event::EventType::KeyPressed:
-                    std::cout << event.key.code << std::endl;
                     switch (event.key.code){
+                        case sf::Keyboard::W:
+                            yNegChange = spd;
+                            break;
                         case sf::Keyboard::A:
-                            std::cout << "A pressed" << std::endl;
+                            xNegChange = spd;
+                            break;
+                        case sf::Keyboard::S:
+                            yPosChange = spd;
+                            break;
+                        case sf::Keyboard::D:
+                            xPosChange = spd;
+                            break;
+                        case sf::Keyboard::Escape:
+                            window.close();
+                            break;
                     }
                     break;
+                case sf::Event::EventType::KeyReleased:
+                    switch (event.key.code) {
+                        case sf::Keyboard::W:
+                            yNegChange = 0;
+                            break;
+                        case sf::Keyboard::A:
+                            xNegChange = 0;
+                            break;
+                        case sf::Keyboard::S:
+                            yPosChange = 0;
+                            break;
+                        case sf::Keyboard::D:
+                            xPosChange = 0;
+                            break;
+                    }
             }
         }
-
+        player.x += xPosChange - xNegChange;
+        player.y += yPosChange - yNegChange;
         //----Game Loop----------///
         //Clearing the previous screen.
+        player.setCords();
         window.clear(sf::Color::Black);
 
         //Drawing happens here
