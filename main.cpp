@@ -1,16 +1,25 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(512,512), "Autumn Leaves", sf::Style::Close | sf::Style::Titlebar);
-    sf::RenderTexture renderTexture;
+sf::RenderWindow window(sf::VideoMode(512,512), "Autumn Leaves", sf::Style::Close | sf::Style::Titlebar);
 
-    if (!renderTexture.create(500,500)){
-        std::cout << "RenderTexture Error" << std::endl;
-        window.close();
+class characterController {
+    public:
+    float x,y = 0.0f;
+    sf::Texture texture;
+    sf::Sprite sprite;
+    characterController (){
+        sprite.setPosition(x,y);
+        if (!texture.loadFromFile("textures/test_texture.png")){
+            std::cout << "Error loading texture from a character Controller" << std::endl;
+            window.close();
+        }
+        sprite.setTexture(texture);
     }
-
+};
+characterController player;
+int main(int argc, char** argv)
+{
     while(window.isOpen()){
     sf::Event event;
         while(window.pollEvent(event)){
@@ -18,21 +27,22 @@ int main()
                 case sf::Event::Closed:
                     window.close();
                     break;
-                case sf::Event::LostFocus:
-                    std::cout << "Focus lost" << std::endl;
-                case sf::Event::GainedFocus:
-                    std::cout << "Focus regained" << std::endl;
+                case sf::Event::EventType::KeyPressed:
+                    std::cout << event.key.code << std::endl;
+                    switch (event.key.code){
+                        case sf::Keyboard::A:
+                            std::cout << "A pressed" << std::endl;
+                    }
                     break;
-
             }
         }
 
         //----Game Loop----------///
         //Clearing the previous screen.
-        window.clear(sf::Color::White);
+        window.clear(sf::Color::Black);
 
         //Drawing happens here
-        //window.draw();
+        window.draw(player.sprite);
 
         //Displaying a new one
         window.display();
