@@ -1,4 +1,4 @@
-
+*.layout
 *.cbp
 *.depend
 *.o
