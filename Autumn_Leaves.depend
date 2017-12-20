@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1510572554 source:/home/reneon/Documents/C++ Projects/frostfall/main.cpp
+	<iostream>
+
+1513713667 source:/home/reneon/Documents/C++ Projects/Autumn_Leaves/main.cpp
+	"gamemanager.h"
+
+1513712509 source:/home/reneon/Documents/C++ Projects/Autumn_Leaves/src/charactercontroller.cpp
+	"charactercontroller.h"
+
+1513713475 /home/reneon/Documents/C++ Projects/Autumn_Leaves/include/charactercontroller.h
+	"gamemanager.h"
+
+1513687008 source:/home/reneon/Documents/C++ Projects/Autumn_Leaves/src/objects.cpp
+	"objects.h"
+	"items.h"
+	<iostream>
+
+1513713660 /home/reneon/Documents/C++ Projects/Autumn_Leaves/include/objects.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	"items.h"
+	<vector>
+
+1513630373 source:/home/reneon/Documents/C++ Projects/Autumn_Leaves/src/items.cpp
+	"items.h"
+
+1513630373 /home/reneon/Documents/C++ Projects/Autumn_Leaves/include/items.h
+
+1513713668 /home/reneon/Documents/C++ Projects/Autumn_Leaves/include/gamemanager.h
+	<SFML/Graphics.hpp>
+	"charactercontroller.h"
+	"objects.h"
+	"items.h"
+
+1513713756 source:/home/reneon/Documents/C++ Projects/Autumn_Leaves/src/gamemanager.cpp
+	"gamemanager.h"
+
